@@ -1,0 +1,23 @@
+{
+  "ID": 5111095,
+  "CODE_GENDER": "F",
+  "FLAG_OWN_CAR": "N",
+  "FLAG_OWN_REALTY": "N",
+  "CNT_CHILDREN": 0,
+  "AMT_INCOME_TOTAL": 112500.0,
+  "NAME_INCOME_TYPE": "Working",
+  "NAME_EDUCATION_TYPE": "Secondary / secondary special",
+  "NAME_FAMILY_STATUS": "Married",
+  "NAME_HOUSING_TYPE": "House / apartment",
+  "DAYS_BIRTH": -10653,
+  "DAYS_EMPLOYED": -3007,
+  "FLAG_MOBIL": 1,
+  "FLAG_WORK_PHONE": 0,
+  "FLAG_PHONE": 1,
+  "FLAG_EMAIL": 0,
+  "OCCUPATION_TYPE": "Core staff",
+  "CNT_FAM_MEMBERS": 2.0,
+  "MONTHS_BALANCE": -6,
+  "STATUS": "C",
+  "mode_status": "C"
+}
