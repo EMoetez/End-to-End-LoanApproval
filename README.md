@@ -49,7 +49,7 @@ This project is an end-to-end solution for predicting loan approval using FastAP
         "feature4": 4.0
     }
     ```
-    You can check features types in "Model Develoment/testV1.ipynb"
+    **You can check features types in "Model Develoment/testV1.ipynb"**
 
 3. **View the Prediction**:
     After uploading the file, the application will display the prediction result: "Approved" or "Rejected".
