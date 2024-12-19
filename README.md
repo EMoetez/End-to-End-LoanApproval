@@ -1,7 +1,6 @@
 # End-to-End-LoanApproval
 
-This project is an end-to-end solution for predicting loan approval using FastAPI and a machine learning model. The application allows users to upload a JSON file containing loan application data and returns a prediction of whether the loan will be approved or rejected.
-
+This project is an end-to-end solution for predicting loan approval using FastAPI, a machine learning model, Elasticsearch, and Kibana. The application allows users to upload a JSON file containing loan application data and returns a prediction of whether the loan will be approved or rejected.
 
 ## Features
 
@@ -9,12 +8,14 @@ This project is an end-to-end solution for predicting loan approval using FastAP
 - **Machine Learning**: Uses a RandomForestClassificationModel for predicting loan approval.
 - **Spark**: Utilizes Apache Spark for data processing.
 - **HTML Interface**: Provides a simple HTML interface for uploading JSON files and displaying predictions.
+- **Elasticsearch**: Logs predictions and input data for further analysis.
+- **Kibana**: Visualizes the logged data from Elasticsearch.
 
 ## Installation
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/your-username/End-to-End-LoanApproval.git
+    git clone https://github.com/EMoetez/End-to-End-LoanApproval.git
     cd End-to-End-LoanApproval
     ```
 
@@ -34,6 +35,16 @@ This project is an end-to-end solution for predicting loan approval using FastAP
     python main.py
     ```
 
+5. **Start Elasticsearch and Kibana**:
+    Ensure Elasticsearch and Kibana are installed and running on your machine. You can download and start them using the following commands:
+    ```sh
+    # Start Elasticsearch
+    sudo systemctl start elasticsearch
+
+    # Start Kibana
+    sudo systemctl start kibana
+    ```
+
 ## Usage
 
 1. **Navigate to the Upload Page**:
@@ -49,14 +60,17 @@ This project is an end-to-end solution for predicting loan approval using FastAP
         "feature4": 4.0
     }
     ```
-    **You can check features types in "Model Develoment/testV1.ipynb"**
+    **You can check features types in "Model Development/testV1.ipynb"**
 
 3. **View the Prediction**:
     After uploading the file, the application will display the prediction result: "Approved" or "Rejected".
 
+4. **View Logs in Kibana**:
+    Open Kibana in your web browser (`http://localhost:5601`). Go to the "Discover" section, create an index pattern for `loan-approval-logs`, and visualize the logged data.
+
 ## File Descriptions
 
-- **main.py**: The main FastAPI application file that handles file uploads, data processing, and predictions.
+- **main.py**: The main FastAPI application file that handles file uploads, data processing, predictions, and logging to Elasticsearch.
 - **Model_Deployment/model/load_predict.py**: Contains functions for loading the model, preprocessing data, and making predictions.
 - **templates/upload.html**: The HTML template for the file upload interface.
 - **static/background.jpg**: The background image used in the HTML template.
@@ -75,3 +89,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - [Apache Spark](https://spark.apache.org/)
 - [Pandas](https://pandas.pydata.org/)
 - [Jinja2](https://palletsprojects.com/p/jinja/)
+- [Elasticsearch](https://www.elastic.co/elasticsearch/)
+- [Kibana](https://www.elastic.co/kibana/)
