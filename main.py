@@ -10,8 +10,9 @@ from pyspark.sql import SparkSession
 import pandas as pd
 from pathlib import Path
 import json
-
-
+from elasticsearch import Elasticsearch
+from datetime import datetime
+#from elastic_logging import ElasticSearchHandler
 
 # Define paths
 path="Model_deployment/model"
@@ -20,6 +21,8 @@ sample_raw_directory = "Model Development/sample/raw"
 working_processed_directory = "Model_Deployment/working/processed"
 working_raw_directory = "Model_Deployment/working/raw"
 
+# Initialize Elasticsearch client
+es = Elasticsearch([{'host': 'localhost', 'port': 9200, 'scheme': 'http'}])
 
 
 # Start a spark session
@@ -44,6 +47,15 @@ except FileNotFoundError:
     raise HTTPException(status_code=500, detail="Model file not found")
 
 #####################################################################
+
+# Route for the homepage
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
+
+
+
+
 @app.get("/predict/", response_class=HTMLResponse)
 async def serve_upload_form(request: Request):
     """
@@ -74,8 +86,21 @@ async def handle_file_upload(request: Request, file: UploadFile = File(...)):
         rf_predictions = predict(working_processed_directory, rf_model)
         
         prediction = "Approved" if (rf_predictions["prediction"] == 1) else "Rejected"
+        
+        # Log to Elasticsearch
+        log_entry = {
+            "timestamp": datetime.now(),
+            "input_data": data,
+            "prediction": prediction
+        }
+        es.index(index="loan-approval-logs", body=log_entry)
+        
         return templates.TemplateResponse("upload.html", {"request": request, "prediction": prediction})
-            
+        
+        
+        
+        
+         
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error processing file: {str(e)}")
 
